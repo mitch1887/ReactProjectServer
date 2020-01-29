@@ -22,18 +22,20 @@ router.post('/', validateSession, (req, res) => {
         .catch(err => res.json(req.errors))
 })
 
-router.get('/:name', (req, res) => {
+// Get Video Game by Name
+router.get('/name/:name', (req, res) => {
+    console.log("Name Endpoint")
+
     VideoGame.findOne({ where: { name: req.params.name } })
         .then(game => res.status(200).json(game))
         .catch(err => res.status(500).json({ error: err }))
 });
 
 // Get Video Game by ID
-router.post('/:id', (req, res) => {
-    const id = req.body.id;
-    console.log("Test")
+router.get('/id/:id', (req, res) => {
+    console.log("ID Endpoint")
 
-    VideoGame.findOne({ where: { id: id } })
+    VideoGame.findOne({ where: { id: req.params.id } })
         .then(game => res.status(200).json(game))
         .catch(err => res.status(500).json({ error: err }))
 });
