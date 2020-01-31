@@ -40,13 +40,16 @@ router.get('/id/:id', (req, res) => {
         .catch(err => res.status(500).json({ error: err }))
 });
 
-router.put('/:id', (req, validateSession, res) => {
-    VideoGame.update(req.body, { where: { id: req.params.id } })
+// Update Video Game by Name
+router.put('/name/:name', validateSession, (req, res) => {
+    VideoGame.update(req.body, { where: { name: req.body.name, owner: req.user.email } })
         .then(game => res.status(200).json(game))
         .catch(err => res.json({ error: err }))
 });
-router.delete('/:id', (req, validateSession, res) => {
-    VideoGame.destroy({ where: { id: req.params.id } })
+
+// Delete Video Game by ID
+router.delete('/:id', validateSession, (req, res) => {
+    VideoGame.destroy({ where: { id: req.params.id, owner: req.user.email } })
         .then(game => res.status(200).json(game))
         .catch(err => res.json({ error: err }))
 });
