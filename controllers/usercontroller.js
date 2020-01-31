@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 //USER SIGNUP
-router.post('/user/signup', (req, res) => {
+router.post('/signup', (req, res) => {
     User.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -26,7 +26,7 @@ router.post('/user/signup', (req, res) => {
 })
 
 
-router.post('/user/signin', (req, res) => {
+router.post('/signin', (req, res) => {
     User.findOne({
         where: { email: req.body.email }
     })
