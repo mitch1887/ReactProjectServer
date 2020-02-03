@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
         .catch(err => res.status(500).json({ error: err }))
 })
 
+// Create Video Game
 router.post('/', validateSession, (req, res) => {
     const gameFromRequest = {
         name: req.body.name,
@@ -50,6 +51,13 @@ router.put('/name/:name', validateSession, (req, res) => {
 // Delete Video Game by ID
 router.delete('/:id', validateSession, (req, res) => {
     VideoGame.destroy({ where: { id: req.params.id, owner: req.user.email } })
+        .then(game => res.status(200).json(game))
+        .catch(err => res.json({ error: err }))
+});
+
+// Delete Video Game by Name
+router.delete('/:id', validateSession, (req, res) => {
+    VideoGame.destroy({ where: { name: req.params.name, owner: req.user.email } })
         .then(game => res.status(200).json(game))
         .catch(err => res.json({ error: err }))
 });
