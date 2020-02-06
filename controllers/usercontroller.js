@@ -25,7 +25,7 @@ router.post('/signup', (req, res) => {
         )
 })
 
-
+//USER SIGNIN
 router.post('/signin', (req, res) => {
     User.findOne({
         where: { email: req.body.email }

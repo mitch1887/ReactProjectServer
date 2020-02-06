@@ -56,7 +56,7 @@ router.delete('/:id', validateSession, (req, res) => {
 });
 
 // Delete Video Game by Name
-router.delete('/:id', validateSession, (req, res) => {
+router.delete('/name/:name', validateSession, (req, res) => {
     VideoGame.destroy({ where: { name: req.params.name, owner: req.user.email } })
         .then(game => res.status(200).json(game))
         .catch(err => res.json({ error: err }))
